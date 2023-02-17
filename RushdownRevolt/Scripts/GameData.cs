@@ -22,9 +22,9 @@ public class IEquipmentData : ScriptableObject
     [JsonProperty]
     public bool hideWhenNotOwned = false;
     [JsonProperty]
-    public bool enabled = false;
+    public bool enabled = true;
     [JsonProperty]
-    public bool isBaseGameItem = false;
+    public bool isBaseGameItem = true;
     public bool idWasSet = false;
 
     [HideInInspector]
@@ -43,7 +43,7 @@ public class IEquipmentData : ScriptableObject
         get { return fileName; }
     }
 
-    public bool IsMod = false;
+    public bool IsMod = true;
 }
 
 public enum CharacterID
