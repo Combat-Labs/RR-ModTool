@@ -1,14 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using PlasticGui.WorkspaceWindow.Items;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.AddressableAssets.Build;
 using UnityEditor.AddressableAssets.Settings;
-using UnityEditor.AddressableAssets.Settings.GroupSchemas;
-using UnityEditor.Overlays;
 using UnityEngine;
 
 namespace RushdownRevolt.ModTool.Editor
@@ -221,23 +216,6 @@ namespace RushdownRevolt.ModTool.Editor
             }
 
             return success;
-        }
-
-        private static void FixGroupTemplate()
-        {
-            AddressableAssetSettings settings =
-                AssetDatabase.LoadAssetAtPath<AddressableAssetSettings>(
-                    "Assets/AddressableAssetsData/AddressableAssetSettings.asset");
-
-            settings.GroupTemplateObjects.Clear();
-
-            settings.GroupTemplateObjects.Add(
-                (AddressableAssetGroupTemplate)AssetDatabase.LoadMainAssetAtPath(
-                    "Packages/com.rushdownrevolt.modtool/RushdownRevolt/Assets/ModTemplate.asset"));
-
-            AssetDatabase.SaveAssets();
-
-            AssetDatabase.Refresh();
         }
 
         private static void AfterBuildTasks()
