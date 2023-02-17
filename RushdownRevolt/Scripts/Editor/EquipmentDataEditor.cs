@@ -4,11 +4,9 @@ using UnityEditor;
 using UnityEngine;
 using System.Linq;
 
-namespace RushdownRevolt.ModTool.Editor
-{
-    [CustomEditor(typeof(IEquipmentData), true)]
+[CustomEditor(typeof(IEquipmentData), true)]
 [CanEditMultipleObjects]
-public class EquipmentDataEditor : UnityEditor.Editor
+public class EquipmentDataEditor : Editor
 {
      SerializedProperty m_Script;
      
@@ -107,5 +105,3 @@ public static class EditorGUILayoutExtentions
     }
 }
 
-
-}

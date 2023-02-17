@@ -3,8 +3,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Serialization;
 
+#if UNITY_EDITOR
+using UnityEditor;
+[CustomEditor(typeof(BoneData))]
+[CanEditMultipleObjects]
+public class boneDataEditor : Editor
+{
+	public GameObject destinationParent = null;
+	public override void OnInspectorGUI()
+	{
+		BoneData boneData = null;
 
-    public class BoneData : MonoBehaviour
+		boneData = Selection.activeGameObject.GetComponent<BoneData>();
+		
+		destinationParent = (GameObject)EditorGUILayout.ObjectField("Desired Bones Parent (usually root)",destinationParent, typeof(GameObject), true);
+
+		if (GUILayout.Button("Remap bone data"))
+		{
+			int boneIndex = 0;
+
+			if (destinationParent != null && boneData != null)
+			{
+				Transform[] bonelist = destinationParent.GetComponentsInChildren<Transform>();
+				
+				foreach (Bone bone in boneData.Bones)
+				{
+					
+					Debug.Log("Looking For " + bone.transform.name);
+					
+					Transform prev = bone.transform;
+
+					foreach (Transform newBone in bonelist)
+					{
+						if (newBone.name == prev.name)
+						{
+							Debug.Log("Found " + boneIndex + " " + bone.transform.name);
+							bone.transform = newBone;
+							break;
+						}
+							
+					}
+
+					boneIndex++;
+				}
+			}
+			
+		}
+		
+		DrawDefaultInspector();
+	}
+}
+#endif
+
+public class BoneData : MonoBehaviour
 {
 	public bool PreviewInvertRotation { get; set; }
 	public bool PreviewMirror { get; set; }

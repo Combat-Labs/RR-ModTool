@@ -6,8 +6,6 @@ using UnityEditor.AddressableAssets.Build;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEngine;
 
-namespace RushdownRevolt.ModTool.Editor
-{
     public class ModToolsEditor : EditorWindow
     {
         private static string CurrentBuildTarget
@@ -286,4 +284,3 @@ namespace RushdownRevolt.ModTool.Editor
             return String.IsNullOrEmpty(str);
         }
     }
-}

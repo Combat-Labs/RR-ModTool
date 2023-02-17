@@ -4,8 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 
-
-    public class CachedMaterial
+public class CachedMaterial
 {
     public Material Material { get; set; }
 	public Material tempMaterial;
@@ -609,4 +608,3 @@ public class MaterialTargetsData : MonoBehaviour
 	public List<TextureId> Textures = new List<TextureId>();
 	public List<MaterialId> Materials = new List<MaterialId>();
 }
-

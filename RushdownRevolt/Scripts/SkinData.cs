@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-    [Serializable]
+[Serializable]
 public class SkinData : ScriptableObject, IDefaultableData
 {
 	public Sprite battlePortrait { get { return battlePortraitFile.obj; } }
@@ -114,4 +114,3 @@ public class SkinData : ScriptableObject, IDefaultableData
 	
 
 }
-

@@ -12,9 +12,7 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 
 using Object = UnityEngine.Object;
 
-namespace RushdownRevolt.ModTool.Editor
-{
-    [CustomEditor(typeof(SkinDefinition))]
+[CustomEditor(typeof(SkinDefinition))]
 [CanEditMultipleObjects]
 public class SkinDefinitionEditor : EquipmentDataEditor
 {
@@ -177,5 +175,4 @@ public class SkinDefinitionEditor : EquipmentDataEditor
 			throw new Exception($"Addressable : can't add {path} to group {groupName}");
 		}
 	}
-}
 }
