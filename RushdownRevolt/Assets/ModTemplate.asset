@@ -31,8 +31,8 @@ MonoBehaviour:
   m_Name: PlayerDataGroupSchema
   m_EditorClassIdentifier: 
   m_Group: {fileID: 0}
-  m_IncludeResourcesFolders: 1
-  m_IncludeBuildSettingsScenes: 1
+  m_IncludeResourcesFolders: 0
+  m_IncludeBuildSettingsScenes: 0
 --- !u!114 &1122839671446056821
 MonoBehaviour:
   m_ObjectHideFlags: 1

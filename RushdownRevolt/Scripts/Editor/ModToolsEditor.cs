@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using PlasticGui.WorkspaceWindow.Items;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.AddressableAssets.Build;
@@ -107,6 +108,11 @@ namespace RushdownRevolt.ModTool.Editor
             CleanMods();
         }
         
+        if (GUILayout.Button("Create Group Template"))
+        {
+            FixGroupTemplate();
+        }
+        
         EditorGUILayoutExtentions.LineSeparator();
         
         EditorGUILayoutExtentions.BeginColoredArea();
@@ -193,18 +199,20 @@ namespace RushdownRevolt.ModTool.Editor
         return success;
     }
 
-    /*private static void FixGroupTemplate()//THis may not be needed?
+    private static void FixGroupTemplate()
     {
-        AssetDatabase.DeleteAsset("Assets\\AddressableAssetsData\\AssetGroupTemplates\\Packed Assets.asset");
-
-        AddressableAssetGroupTemplate item = ObjectFactory.CreateInstance<AddressableAssetGroupTemplate>();
-
-        BundledAssetGroupSchema groupSchema = (BundledAssetGroupSchema)item.SchemaObjects[item.FindSchema(typeof(BundledAssetGroupSchema))];
-
-        groupSchema.BuildPath = "";
+        AddressableAssetSettings settings =
+            AssetDatabase.LoadAssetAtPath<AddressableAssetSettings>(
+                "Assets/AddressableAssetsData/AddressableAssetSettings.asset");
         
-        AssetDatabase.CreateAsset(item, "Assets\\AddressableAssetsData\\AssetGroupTemplates\\Mods.asset");
-    }*/
+        settings.GroupTemplateObjects.Clear();
+        
+        settings.GroupTemplateObjects.Add( (AddressableAssetGroupTemplate)AssetDatabase.LoadMainAssetAtPath("Packages/com.rushdownrevolt.modtool/RushdownRevolt/Assets/ModTemplate.asset"));
+        
+        AssetDatabase.SaveAssets();
+        
+        AssetDatabase.Refresh();
+    }
 
     private static void AfterBuildTasks()
     {
