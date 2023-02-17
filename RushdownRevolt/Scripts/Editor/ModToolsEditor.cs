@@ -127,9 +127,9 @@ namespace RushdownRevolt.ModTool.Editor
                 CleanMods();
             }
 
-            if (GUILayout.Button("Create Group Template"))
+            if (GUILayout.Button("Set Local Paths"))
             {
-                FixGroupTemplate();
+                SetPaths();
             }
 
             EditorGUILayoutExtentions.LineSeparator();
@@ -160,8 +160,7 @@ namespace RushdownRevolt.ModTool.Editor
 
                     _shaderPrefix.stringValue = _modName;
                     _addressableSettings.ApplyModifiedProperties();
-                    AssetDatabase.SaveAssets();
-
+                    
                     if (BuildMods())
                     {
                         AfterBuildTasks();
@@ -280,8 +279,19 @@ namespace RushdownRevolt.ModTool.Editor
                 AssetDatabase.Refresh();
             }
         }
-    }
+        
+        private static void SetPaths()
+        {
+            AddressableAssetSettings settings =
+                AssetDatabase.LoadAssetAtPath<AddressableAssetSettings>(
+                    "Assets/AddressableAssetsData/AddressableAssetSettings.asset");
 
+            var id = settings.profileSettings.GetProfileId("Default");
+            settings.profileSettings.SetValue(id, "Local.BuildPath", "Exported");
+            settings.profileSettings.SetValue(id, "Local.LoadPath", "Mods/{MODNAME}/");
+        }
+    }
+    
     [InitializeOnLoad]
     class ModToolsLoad
     {
