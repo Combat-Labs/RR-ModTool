@@ -15,24 +15,8 @@ MonoBehaviour:
   m_SchemaObjects:
   - {fileID: 8131425306166122445}
   - {fileID: 1122839671446056821}
-  - {fileID: 770229318565855972}
   m_Description: Pack assets into asset bundles.
   m_Settings: {fileID: 11400000, guid: 2dc44dc8ff3617c4f842988a9ef96a91, type: 2}
---- !u!114 &770229318565855972
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1487f5d688e4f94f828f879d599dbdc, type: 3}
-  m_Name: PlayerDataGroupSchema
-  m_EditorClassIdentifier: 
-  m_Group: {fileID: 0}
-  m_IncludeResourcesFolders: 0
-  m_IncludeBuildSettingsScenes: 0
 --- !u!114 &1122839671446056821
 MonoBehaviour:
   m_ObjectHideFlags: 1
