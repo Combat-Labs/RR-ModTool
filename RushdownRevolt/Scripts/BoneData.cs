@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Serialization;
 
-namespace RushdownRevolt.ModTool
-{
+
     public class BoneData : MonoBehaviour
 {
 	public bool PreviewInvertRotation { get; set; }
@@ -120,5 +119,4 @@ namespace RushdownRevolt.ModTool
 
 		Bones = boneList;
 	}
-}
 }

@@ -4,8 +4,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
-namespace RushdownRevolt.ModTool
-{
+
     [JsonObject(MemberSerialization.OptIn)]
     public class IEquipmentData : ScriptableObject
     {
@@ -189,4 +188,3 @@ namespace RushdownRevolt.ModTool
             return (int)obj;
         }
     }
-}

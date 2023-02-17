@@ -10,8 +10,6 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.ResourceLocations;
 using UnityEngine.Serialization;
 
-namespace RushdownRevolt.ModTool
-{
     [JsonObject(MemberSerialization.OptIn)]
     public class SkinDefinition : IEquipmentData
     {
@@ -96,4 +94,3 @@ namespace RushdownRevolt.ModTool
     	public Color primaryColor = Color.gray;
     	public Color secondaryColor = Color.cyan;
     }
-}

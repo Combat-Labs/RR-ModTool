@@ -4,8 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 
-namespace RushdownRevolt.ModTool
-{
+
     public class CachedMaterial
 {
     public Material Material { get; set; }
@@ -611,4 +610,3 @@ public class MaterialTargetsData : MonoBehaviour
 	public List<MaterialId> Materials = new List<MaterialId>();
 }
 
-}

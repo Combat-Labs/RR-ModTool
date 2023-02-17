@@ -4,8 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-namespace RushdownRevolt.ModTool
-{
     [Serializable]
 public class SkinData : ScriptableObject, IDefaultableData
 {
@@ -117,4 +115,3 @@ public class SkinData : ScriptableObject, IDefaultableData
 
 }
 
-}
