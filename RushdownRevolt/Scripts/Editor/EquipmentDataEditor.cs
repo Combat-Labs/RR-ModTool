@@ -8,27 +8,27 @@ using System.Linq;
 [CanEditMultipleObjects]
 public class EquipmentDataEditor : Editor
 {
-     SerializedProperty m_Script;
-     
-     public string[] m_PropertyPathToExcludeForChildClassess;
-     public bool workingOnMultipleObjects = false;
-     public IEquipmentData[] data;
+    SerializedProperty m_Script;
 
-     public bool DrawChildClassPropertiesGUI = true;
-     
+    public string[] m_PropertyPathToExcludeForChildClassess;
+    public bool workingOnMultipleObjects = false;
+    public IEquipmentData[] data;
+
+    public bool DrawChildClassPropertiesGUI = true;
+
     protected virtual void OnEnable()
     {
         m_Script = serializedObject.FindProperty("m_Script");
-        
+
         workingOnMultipleObjects = targets.Length > 1;
         data = Array.ConvertAll(targets, item => (IEquipmentData)item);
-        
+
         m_PropertyPathToExcludeForChildClassess = new[]
         {
             m_Script.propertyPath,
         };
     }
-    
+
 
     public override void OnInspectorGUI()
     {
@@ -39,13 +39,12 @@ public class EquipmentDataEditor : Editor
         EquipmentDataBody();
         EditorGUILayoutExtentions.LineSeparator();
         EquipmentDataFooter();
-        
+
         serializedObject.ApplyModifiedProperties();
-        
     }
+
     protected virtual void EquipmentDataHeader()
     {
-       
     }
 
     protected virtual void EquipmentDataBody()
@@ -55,21 +54,19 @@ public class EquipmentDataEditor : Editor
         centeredTextStyle.alignment = TextAnchor.MiddleCenter;
         GUILayout.Label("Default Item Data", centeredTextStyle);
         EditorGUILayoutExtentions.EndColoredArea();
-        
+
         if (!workingOnMultipleObjects)
             ChildClassPropertiesGUI();
     }
 
     protected virtual void EquipmentDataFooter()
     {
-
     }
-    
+
     private void ChildClassPropertiesGUI()
     {
         DrawPropertiesExcluding(serializedObject, m_PropertyPathToExcludeForChildClassess);
     }
-
 }
 
 
@@ -82,26 +79,24 @@ public static class EditorGUILayoutExtentions
 
     public static void BeginColoredArea(Color? BGColor = null)
     {
-        Color defaultColor=GUI.color;
-        
-        GUI.color= BGColor.GetValueOrDefault(Color.black);
+        Color defaultColor = GUI.color;
+
+        GUI.color = BGColor.GetValueOrDefault(Color.black);
         EditorGUILayout.BeginHorizontal("box");
-        GUI.color=defaultColor;
+        GUI.color = defaultColor;
     }
 
     public static void EndColoredArea()
     {
         EditorGUILayout.EndHorizontal();
-
     }
-    
+
     public static GUIStyle GUIStyleColor(Color color)
     {
         GUIStyle style = new GUIStyle(EditorStyles.label);
 
         style.normal.textColor = color;
-        
+
         return style;
     }
 }
-

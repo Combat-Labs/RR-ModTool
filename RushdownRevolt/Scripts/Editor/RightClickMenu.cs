@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class RightClickMenu 
+public class RightClickMenu
 {
     [MenuItem("Assets/CombatLabs/Create/Skin Definition", priority = 2)]
     private static void CreateSkinDefinition(MenuCommand command)

@@ -23,32 +23,34 @@ public class SkinDataEditor : Editor
     private void OnEnable()
     {
         _skinData = target as SkinData;
-        
+
         _prefab = serializedObject.FindProperty("characterPrefabFile");
         _combinedPrefab = serializedObject.FindProperty("combinedPrefabFile");
         _partnerPrefab = serializedObject.FindProperty("partnerPrefabFile");
         _combinedPartnerPrefab = serializedObject.FindProperty("combinedPartnerPrefabFile");
-        
+
         _skinDefinition = serializedObject.FindProperty("skinDefinitionFile");
-        
+
         _weaponTrails = serializedObject.FindProperty("weaponTrails");
         _particles = serializedObject.FindProperty("uniquePrefabs");
     }
 
     public override void OnInspectorGUI()
     {
-        serializedObject.Update();
-        
+        //serializedObject.Update();
+
         EditorGUILayout.PropertyField(_prefab, new GUIContent("Character Prefab"));
         EditorGUILayout.PropertyField(_combinedPrefab, new GUIContent("Combined Prefab"));
         EditorGUILayout.PropertyField(_partnerPrefab, new GUIContent("Partner Prefab"));
         EditorGUILayout.PropertyField(_combinedPartnerPrefab, new GUIContent("Combined Partner Prefab"));
-        
+
         EditorGUILayout.PropertyField(_skinDefinition, new GUIContent("Skin Definition"));
-        
+
         EditorGUILayout.PropertyField(_weaponTrails, new GUIContent("Weapon Trails"));
         EditorGUILayout.PropertyField(_particles, new GUIContent("Custom Particles"));
-        
+
+        serializedObject.ApplyModifiedProperties();
+
         if (GUILayout.Button("Save"))
         {
             EditorUtility.SetDirty(_skinData);
