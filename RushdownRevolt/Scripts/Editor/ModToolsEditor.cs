@@ -52,9 +52,6 @@ public class ModToolsEditor : EditorWindow
     private static SerializedProperty _layer16;
     private static string _modName;
 
-    private static SerializedObject _addressableSettings;
-    private static SerializedProperty _shaderPrefix;
-
     private static AddressableAssetSettings _aaSettings;
 
     [MenuItem("Mod Tools/Open Editor")]
@@ -86,11 +83,6 @@ public class ModToolsEditor : EditorWindow
         _aaSettings = AssetDatabase.LoadAssetAtPath<AddressableAssetSettings>(
             "Assets/AddressableAssetsData/AddressableAssetSettings.asset");
         
-        _addressableSettings =
-            new SerializedObject(_aaSettings);
-        
-        _shaderPrefix = _addressableSettings.FindProperty("m_ShaderBundleCustomNaming");
-
         if (_aaSettings.ShaderBundleNaming != ShaderBundleNaming.Custom)
         {
             _aaSettings.ShaderBundleNaming = ShaderBundleNaming.Custom;
@@ -154,13 +146,15 @@ public class ModToolsEditor : EditorWindow
 
         if (!_modName.IsNullOrEmpty())
         {
-            if (_shaderPrefix.stringValue != _modName)
+            if (_aaSettings.ShaderBundleCustomNaming != _modName)
             {
                 if (GUILayout.Button("Save Mod Name"))
                 {
-                    _shaderPrefix.stringValue = _modName;
-                    _addressableSettings.ApplyModifiedProperties();
-
+                    _aaSettings.ShaderBundleNaming = ShaderBundleNaming.Custom;
+                    _aaSettings.ShaderBundleCustomNaming = _modName;
+                    
+                    _aaSettings.SetDirty();
+                    
                     AssetDatabase.SaveAssets();
 
                     AssetDatabase.Refresh();
@@ -274,13 +268,14 @@ public class ModToolsEditor : EditorWindow
 
     private static void SetPaths()
     {
-        AddressableAssetSettings settings =
-            AssetDatabase.LoadAssetAtPath<AddressableAssetSettings>(
-                "Assets/AddressableAssetsData/AddressableAssetSettings.asset");
-
-        var id = settings.profileSettings.GetProfileId("Default");
-        settings.profileSettings.SetValue(id, "Local.BuildPath", "Exported");
-        settings.profileSettings.SetValue(id, "Local.LoadPath", "Mods/{MODNAME}/");
+        
+        var id = _aaSettings.profileSettings.GetProfileId("Default");
+        _aaSettings.profileSettings.SetValue(id, "Local.BuildPath", "Exported");
+        _aaSettings.profileSettings.SetValue(id, "Local.LoadPath", "Mods/{MODNAME}/");
+        
+        _aaSettings.SetDirty();
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 }
 
