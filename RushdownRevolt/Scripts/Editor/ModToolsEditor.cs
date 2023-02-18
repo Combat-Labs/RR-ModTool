@@ -55,6 +55,8 @@ public class ModToolsEditor : EditorWindow
     private static SerializedObject _addressableSettings;
     private static SerializedProperty _shaderPrefix;
 
+    private static AddressableAssetSettings _aaSettings;
+
     [MenuItem("Mod Tools/Open Editor")]
     public static void OpenEditor()
     {
@@ -81,11 +83,23 @@ public class ModToolsEditor : EditorWindow
         _tagManager = new SerializedObject(AssetDatabase.LoadMainAssetAtPath("ProjectSettings/TagManager.asset"));
         _layer16 = _tagManager.FindProperty("layers.Array.data[16]");
 
+        _aaSettings = AssetDatabase.LoadAssetAtPath<AddressableAssetSettings>(
+            "Assets/AddressableAssetsData/AddressableAssetSettings.asset");
+        
         _addressableSettings =
-            new SerializedObject(
-                AssetDatabase.LoadAssetAtPath<AddressableAssetSettings>(
-                    "Assets/AddressableAssetsData/AddressableAssetSettings.asset"));
+            new SerializedObject(_aaSettings);
+        
         _shaderPrefix = _addressableSettings.FindProperty("m_ShaderBundleCustomNaming");
+
+        if (_aaSettings.ShaderBundleNaming != ShaderBundleNaming.Custom)
+        {
+            _aaSettings.ShaderBundleNaming = ShaderBundleNaming.Custom;
+        
+            _aaSettings.SetDirty();
+            AssetDatabase.SaveAssetIfDirty(_aaSettings);
+            AssetDatabase.Refresh();
+        }
+        
     }
 
     private void OnGUI()
